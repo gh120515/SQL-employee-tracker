@@ -134,8 +134,14 @@ const questions = function () {
             }
         )
         } else if (answer.prompt === 'View All Roles') {
-            connection.query(
-                "SELECT * FROM role;", 
+            connection.query(`
+                SELECT
+                    role.id,
+                    role.title AS role,
+                    department.name AS department,
+                    role.salary AS salary
+                FROM role
+                LEFT JOIN department ON role.department_id = department.id;`, 
                 function(err, result, fields) {
                   if (err) throw err;
                   console.table(result);
@@ -231,10 +237,7 @@ const questions = function () {
             console.log(`\x1b[33m%s\x1b[0m`, `\nConnection ended. See you next time!`);
         }
     })
-
-
-        
-
+    
         // arrays to store choices from queries
         let roles = [];
         let employees = [];
