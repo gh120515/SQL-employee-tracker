@@ -32,7 +32,7 @@ const questions = function () {
             })
 
         } else if (answer.prompt === 'Add Employee') {
-            // get role & manager for this employee
+            // get role & employee (to be the manager) for this employee
             getRole();
             getEmployee();
             // query for new employee details
@@ -88,7 +88,38 @@ const questions = function () {
                 questions();
             });
 
+        } else if (answer.prompt === 'Update Employee Role') {
+            getRole();
+            getEmployee();
+            connection.query(`SELECT * FROM employee, role`, (err, result) => {
+                if (err) throw err;
+                inquirer.prompt([
+                    {
+                        type: 'list',
+                        name: 'employee',
+                        message: 'Please select the employee to update.',
+                        choices: employees
+                    },
+                    {
+                        type: 'list',
+                        name: 'role',
+                        message: 'Select the new role for this employee.',
+                        choices: roles
+                    }
+                ]).then((answers) => {
+                    let roleID = answers.role.split(":")
+                    let employeeID = answers.employee.split(":")
+                    let values = [roleID[0], employeeID[0]]
+
+                    connection.query(`UPDATE employee SET role_id = ? WHERE id = ?`, values, (err, result) => {
+                        if (err) throw err;
+                        console.log(`Updated ${answers.employee}\'s role to the database.`)
+
+                        questions();
+                    });
+                })
             }
+            )}
         })
 
 
