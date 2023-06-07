@@ -179,8 +179,45 @@ const questions = function () {
                   });
                   questions();
               });
+        } else if (answer.prompt === 'View All Departments') {
+            connection.query("SELECT * FROM department", function(err, result, fields) {
+                if (err) throw err;
+                console.table(result);
+
+                questions();
+            });
+        } else if (answer.prompt === 'Add Department') {
+            // get all departments
+              getDepartments();
+              // query for new deparment details
+              inquirer.prompt([
+                  {
+                      type: 'input',
+                      name: 'department',
+                      message: 'Please enter the name of this new department.',
+                      validate: deptInput => {
+                          if (deptInput) {
+                              return true;
+                          } else {
+                              console.log('Field can not be blank!');
+                              return false;
+                          }
+                      }
+                  },
+              ]).then(function(answers) {
+                  connection.query(`INSERT INTO department (name)
+                  VALUES ('${answers.department}')`,
+                      function (err, res) {
+                      if (err) throw err;
+                      console.log(`\nAdded new role: ${answers.department} to the database.`)
+                  });
+                  questions();
+              });
+        } else {
+            connection.end();
+            console.log(`\x1b[33m%s\x1b[0m`, `\nConnection ended. See you next time!`);
         }
-        })
+    })
 
 
         
