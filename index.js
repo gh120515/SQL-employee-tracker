@@ -119,7 +119,18 @@ const questions = function () {
                     });
                 })
             }
-            )}
+        )
+        } else if (answer.prompt === 'View All Roles') {
+            connection.query(
+                "SELECT * FROM role;", 
+                function(err, result, fields) {
+                  if (err) throw err;
+                  console.table(result);
+                 
+                  questions();
+                }
+              );
+        }
         })
 
 
