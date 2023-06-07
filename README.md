@@ -59,6 +59,9 @@ Below is an example of data entry.
 
 ## Credits
 
+### Additional npm packages
+[console.table](https://www.npmjs.com/package/console.table) by Gleb Bahmutov
+
 ### Tutorials
 
 
