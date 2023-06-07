@@ -130,6 +130,55 @@ const questions = function () {
                   questions();
                 }
               );
+        } else if (answer.prompt === 'Add Role') {
+              // get all roles & departments
+              getRole();
+              getDepartments();
+              // query for new role details
+              inquirer.prompt([
+                  {
+                      type: 'input',
+                      name: 'role',
+                      message: 'Please enter the name of the new role.',
+                      validate: roleInput => {
+                          if (roleInput) {
+                              return true;
+                          } else {
+                              console.log('Field can not be blank!');
+                              return false;
+                          }
+                      }
+                  },
+                  {
+                      type: 'list',
+                      name: 'department',
+                      message: 'Please select the department this new role will belong in.',
+                      choices: departments
+                  },
+                  {
+                      type: 'number',
+                      name: 'salary',
+                      message: 'Please enter the salary for this new role (in numerical values)',
+                      validate: salaryInput => {
+                        if (salaryInput) {
+                            return true;
+                        } else {
+                            console.log('Field can not be blank!');
+                            return false;
+                        }
+                    }
+                  },
+              ]).then(function(answers) {
+                  // split ID from role/manager to insert as either role_id or manager_id into db
+                  let departmentID = answers.department.split(":")
+                  connection.query(`INSERT INTO role (title, salary, department_id)
+                  VALUES ('${answers.role}','${answers.salary}','${departmentID[0]}')`,
+                      function (err, res) {
+                      if (err) throw err;
+                      console.log(`\nAdded new role: ${answers.role} to the database.`)
+                  });
+                  questions();
+              });
         }
         })
 
@@ -157,6 +206,15 @@ const questions = function () {
                 if (err) throw err;
                 for (i = 0; i < data.length; i++) {
                     employees.push(data[i].id + ": " + data[i].first_name + " " + data[i].last_name)
+                }
+            }) 
+        };
+
+        function getDepartments () {
+            connection.query("SELECT * FROM department;", function (err, data) {
+                if (err) throw err;
+                for (i = 0; i < data.length; i++) {
+                    departments.push(data[i].id + ": " + data[i].name)
                 }
             }) 
         };
