@@ -24,7 +24,20 @@ const questions = function () {
         }
     ]).then((answer) => {
         if (answer.prompt === 'View All Employees') {
-            connection.query(`SELECT * FROM employee`, (err, res) => {
+            connection.query(`
+            SELECT
+                employee.id,
+                employee.first_name,
+                employee.last_name,
+                role.title AS role,
+                department.name AS department,
+                role.salary AS salary,
+            CONCAT(manager_column.first_name,' ', manager_column.last_name) AS manager
+            FROM employee
+            LEFT JOIN role ON employee.role_id = role.id
+            LEFT JOIN department ON role.department_id = department.id
+            LEFT JOIN employee manager_column ON employee.manager_id = manager_column.id;`,
+             (err, res) => {
                 if (err) throw err;
                 console.table(res);
                 // repeat question prompt until exit; applies to all questions below
