@@ -1,8 +1,35 @@
 // required modules
-const inquirer = require('inquirer');
+const questions = require('./index.js')
 const util = require('util');
 const express = require('express')
 const mysql = require('mysql2');
+
+const connection = mysql.createConnection({
+    host: 'localhost',
+    port: 3306,
+    database: 'employee_db',
+    password: process.env.password,
+    user: 'root'
+});
+
+// CREATE a book
+router.post('/', (req, res) => {
+    // Use Sequelize's `create()` method to add a row to the table
+    // Similar to `INSERT INTO` in plain SQL
+    Book.create({
+      title: req.body.title,
+      author: req.body.author,
+      is_paperback: true
+    })
+      .then((newBook) => {
+        // Send the newly created row as a JSON object
+        res.json(newBook);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+
 
 // util package to use await on iquirer prompts & database file creation
 const createFile = util.promisify(writeToFile)
