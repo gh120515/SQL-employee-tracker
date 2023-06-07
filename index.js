@@ -1,7 +1,7 @@
 // required modules
 const inquirer = require('inquirer');
-// establish connection to the mysql instance (import from server.js)
-const {connection} = require('./server.js');
+// establish connection to the mysql instance
+const connection  = require('./config/connection');
 const consoleTable = require('console.table'); 
 
 const questions = function () {
