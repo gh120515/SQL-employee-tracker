@@ -16,8 +16,7 @@ The following are required to use this app:
 
 You can do this through the 'Code' button above this README; for example, you can clone the repository to your local machine.
 
-![Options for downloading the repo]()
-<!-- insert updated ss -->
+![Options for downloading the repo](Assets/download.png)
 
 2. Node.js
 
@@ -29,16 +28,37 @@ Otherwise, [this link](https://nodejs.dev/en/learn/how-to-install-nodejs/) will 
 
 Functionality has been confirmed on Node.js version 16.20.0 & version 18.16.0. Note that other versions may not function as intended.
 
+3. MySQL
+
+MySQL will be required to manage the database. 
+
+Refer to the [installation guide](https://coding-boot-camp.github.io/full-stack/mysql/mysql-installation-guide) for full details.
+
 ## Usage
 
 After performing the basic setup, open the repository that you downloaded / cloned - you can do this in multiple ways, such as through the terminal.
 
-The most convinient method is through VS Code (source-code editor program), which has a function where you can directly open the terminal in the directory (right-click on the 'Develop' folder, then select 'Open in Integrated Terminal').
+The most convinient method is through VS Code (source-code editor program), which has a function where you can directly open the terminal in the directory (e.g.) right-click on the 'Develop' folder, then select 'Open in Integrated Terminal').
 
-![Screenshot of the directory, where you can open the integrated terminal]()
-<!-- TODO: INSERT SCREENSHOT -->
+![Screenshot of the directory, where you can open the integrated terminal](Assets/directory.png)
 
-After opening the repository directory (in the 'Develop' folder) in the terminal, enter the following to run the app:
+After opening the repository directory, do the following:
+
+1. Open the terminal in the 'db' folder
+
+then set up the database after logging into MySQL (your own cretidentials may be required):
+
+![Terminal in the 'db' folder of the app](Assets/db.png)
+
+    SOURCE schema.sql
+    SOURCE seeds.sql
+
+    <!-- optional: run to see if the sample database has been seeded correctly -->
+    SELECT * FROM employee;
+
+![example employee database from seeds.sql](Assets/example_db.png)
+
+Then, enter the following to run the app:
 
     <!-- npm i (install) only required for the initial run (will install required dependencies) -->
     npm i && npm start
@@ -46,14 +66,15 @@ After opening the repository directory (in the 'Develop' folder) in the terminal
     <!-- on subsequent runs: -->
     npm start
 
-Follow the prompts (example below) then select.
+Follow the prompts (example below) then select (using UP and DOWN keys & Enter).
 
-![Prompts to follow after initialsing the app]()
-<!-- TODO: INSERT SCREENSHOT -->
+![Prompts to follow after initialsing the app](Assets/prompts.png)
 
 Below are example screenshots of viewing and entering data.
 
-<!-- TODO: INSERT SCREENSHOT -->
+![Example of 'View All Employees'](Assets/view.png)
+
+![Example of 'Add Employee'](Assets/add.png)
 
 ### Demonstration
 
