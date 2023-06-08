@@ -46,7 +46,7 @@ After opening the repository directory, do the following:
 
 1. Open the terminal in the 'db' folder
 
-then set up the database after logging into MySQL (your own cretidentials may be required):
+Then set up the database after logging into MySQL (your own cretidentials may be required):
 
 ![Terminal in the 'db' folder of the app](Assets/db.png)
 
@@ -57,6 +57,8 @@ then set up the database after logging into MySQL (your own cretidentials may be
     SELECT * FROM employee;
 
 ![example employee database from seeds.sql](Assets/example_db.png)
+
+2. Open the terminal in the 'Develop' folder
 
 Then, enter the following to run the app:
 
@@ -78,7 +80,7 @@ Below are example screenshots of viewing and entering data.
 
 ### Demonstration
 
-[Walkthrough Video]()
+[Walkthrough Video](https://drive.google.com/file/d/1BP2YLShoWwWxC_oai9xFtZBupbsbrCJX/view)
 
 ## Credits
 
