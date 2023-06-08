@@ -51,6 +51,8 @@ Then set up the database after logging into MySQL (your own cretidentials may be
 ![Terminal in the 'db' folder of the app](Assets/db.png)
 
     SOURCE schema.sql
+    
+    <!-- optional: run to pre-populate database if desired  -->
     SOURCE seeds.sql
 
     <!-- optional: run to see if the sample database has been seeded correctly -->
